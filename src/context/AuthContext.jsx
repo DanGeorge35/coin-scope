@@ -14,19 +14,32 @@ const UserContext = createContext();
 export const AuthContextProvider = ({ children }) => {
   const [user, setUser] = useState({});
 
-  const signUp = (email, password) => {
-    createUserWithEmailAndPassword(auth, email, password);
-    return setDoc(doc(db, "users", email), {
-      watchList: [],
-    });
+  const signUp = async (email, password) => {
+    const response = await createUserWithEmailAndPassword(
+      auth,
+      email,
+      password
+    );
+    const docRes = await doc(db, "users", email);
+    try {
+      await setDoc(docRes, {
+        watchList: [],
+      });
+    } catch (error) {
+      console.log(error);
+    }
+
+    return response;
   };
 
-  const signIn = (email, password) => {
-    return signInWithEmailAndPassword(auth, email, password);
+  const signIn = async (email, password) => {
+    const response = await signInWithEmailAndPassword(auth, email, password);
+    return response;
   };
 
-  const logOut = () => {
-    return signOut(auth);
+  const logOut = async () => {
+    const response = await signOut(auth);
+    return response;
   };
 
   useEffect(() => {
@@ -47,5 +60,9 @@ export const AuthContextProvider = ({ children }) => {
 };
 
 export const UserAuth = () => {
-  return useContext(UserContext);
+  try {
+    return useContext(UserContext);
+  } catch (error) {
+    throw error;
+  }
 };
