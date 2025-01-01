@@ -3,6 +3,13 @@ import { Link, useNavigate } from "react-router-dom";
 import ThemeToggle from "./ThemeToggle";
 import { AiOutlineClose, AiOutlineMenu } from "react-icons/ai";
 import { UserAuth } from "../context/AuthContext";
+import {
+  HiOutlineLogin,
+  HiUser,
+  HiOutlineLogout,
+  HiUserAdd,
+  HiHome,
+} from "react-icons/hi";
 
 const NavBar = () => {
   const { user, logOut } = UserAuth();
@@ -24,38 +31,62 @@ const NavBar = () => {
   };
 
   return (
-    <div className="rounded-div flex items-center justify-between h-20 mx-auto font-semibold mt-2">
+    <div className="top-nav flex items-center justify-between h-20 font-semibold  mb-16 mx-20 overflow-hidden">
       <Link to="/">
         {" "}
-        <h1 className="text-xl font-bold">Satoshi Check</h1>{" "}
+        <h1 className="text-xl font-bold ml-6">
+          <span className="inline-block align-middle text-white">
+            SEARCH.COIN
+          </span>
+        </h1>
       </Link>
 
-      <div className="hidden md:flex">
+      <div className="flex items-center space-x-5 mr-5">
+        {user?.email ? (
+          <>
+            <Link
+              className="bg-green-600 hidden sm:inline-block text-black py-2 px-3 rounded-full shadow-md hover:bg-green-700 transition-all duration-300"
+              to="/account"
+            >
+              <HiUser className="text-white text-2xl  inline-block align-top" />
+              <span className=" ml-3 text-white text-sm">Account</span>
+            </Link>
+            <button
+              className="bg-gray-800 text-white py-2 px-3 hidden sm:inline-block rounded-full shadow-md hover:bg-gray-600 transition-all duration-300"
+              onClick={handleSignOut}
+            >
+              <HiOutlineLogout className="text-red-800 text-2xl  inline-block" />
+
+              <span className=" ml-3 text-white text-sm">Sign Out</span>
+            </button>
+          </>
+        ) : (
+          <>
+            <Link
+              className="bg-gray-200  items-center text-black  hidden sm:inline-block py-2 px-3 rounded-full shadow-md hover:bg-gray-300 transition-all duration-300"
+              to="/signIn"
+            >
+              <HiOutlineLogin className="text-gray-700 text-2xl inline-block align-top" />
+              <span className="ml-3 text-gray-800 text-sm">Sign In</span>
+            </Link>
+
+            <Link
+              className="bg-gray-200  items-center text-black  hidden sm:inline-block py-2 px-3 rounded-full shadow-md hover:bg-gray-300 transition-all duration-300 mt-4 md:mt-0 md:ml-4"
+              to="/signUp"
+            >
+              <HiUserAdd className="text-gray-700 text-2xl inline-block align-top" />
+              <span className="ml-3 text-gray-800 text-sm">Sign Up</span>
+            </Link>
+          </>
+        )}
         <ThemeToggle />
       </div>
-
-     {
-        user?.email ? (
-            <div>
-                <Link className="p-4" to = "/account"> Account</Link>
-                <button className="" onClick={handleSignOut}>Sign Out</button>
-            </div>
-        ) : ( <div className="hidden md:block">
-        <Link className="p-4 hover:text-accent" to="/signIn">
-          Sign In
-        </Link>
-        <Link
-          className="bg-button text-buttonText px-5 py-2 ml-2 rounded-2xl shadow-lg hover:shadow-2xl"
-          to="/signUp"
-        >
-          Sign Up
-        </Link>
-      </div>)
-     }
-
       {/*mobile menu icon */}
-      <div className="flex md:hidden cursor-pointer z-10" onClick={handleNav}>
-        {showNav ? <AiOutlineClose size={25} /> : <AiOutlineMenu size={25} />}
+      <div
+        className="flex md:hidden cursor-pointer z-10 mr-8"
+        onClick={handleNav}
+      >
+        {showNav ? <AiOutlineClose size={35} /> : <AiOutlineMenu size={35} />}
       </div>
 
       {/*mobile menu*/}
@@ -69,30 +100,45 @@ const NavBar = () => {
         <ul className="w-full p-4">
           <li className="border-b py-6">
             {" "}
-            <Link onClick={handleNav} to="/">Home</Link>{" "}
+            <Link onClick={handleNav} to="/">
+              <HiHome className="text-gray-600 text-2xl  inline-block align-top mr-7" />
+              Home
+            </Link>{" "}
           </li>
           <li className="border-b py-6">
             {" "}
-            <Link onClick={handleNav} to="/account">Account</Link>{" "}
-          </li>
-          <li className="border-b py-6">
-            {" "}
-            <ThemeToggle />{" "}
+            <Link onClick={handleNav} to="/account">
+              <HiUser className="text-gray-600 text-2xl  inline-block align-top mr-7" />
+              Account
+            </Link>{" "}
           </li>
         </ul>
         <div className="flex flex-col w-full p-4 ">
-          <Link onClick={handleNav} to="/signIn">
-            {" "}
-            <button className="w-full my-2 p-3 bg-primary border border-secondary rounded-2xl shadow-2xl">
-              Sign In
-            </button>{" "}
-          </Link>
-          <Link onClick={handleNav} to="/signUp">
-            {" "}
-            <button className="w-full my-2 p-3 bg-button text-buttonText border border-secondary rounded-2xl shadow-2xl">
-              Sign Up
-            </button>{" "}
-          </Link>
+          {user?.email ? (
+            <button
+              className="bg-gray-800 w-full text-white py-2 px-3  rounded-full shadow-md hover:bg-gray-600 transition-all duration-300"
+              onClick={handleSignOut}
+            >
+              <HiOutlineLogout className="text-red-800 text-2xl  inline-block" />
+
+              <span className=" ml-3 text-white text-sm">Sign Out</span>
+            </button>
+          ) : (
+            <>
+              <Link onClick={handleNav} to="/signIn">
+                {" "}
+                <button className="w-full my-2 p-3 bg-primary border border-secondary rounded-2xl shadow-2xl">
+                  Sign In
+                </button>{" "}
+              </Link>
+              <Link onClick={handleNav} to="/signUp">
+                {" "}
+                <button className="w-full my-2 p-3 bg-button text-buttonText border border-secondary rounded-2xl shadow-2xl">
+                  Sign Up
+                </button>{" "}
+              </Link>
+            </>
+          )}
         </div>
       </div>
     </div>
