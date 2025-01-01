@@ -4,64 +4,91 @@ import { AiFillInstagram, AiOutlineInstagram } from "react-icons/ai";
 import { FaFacebook, FaTwitter, FaGithub } from "react-icons/fa";
 const Footer = () => {
   return (
-    <div className="rounded-div mt-8 pt-8 text-primary">
-      <div className="grid md:grid-cols-2">
-        <div className="flex justify-evenly w-full md:max-w-[300px] capitalize">
+    <div className="footer-div mt-8 pt-8 px-10 text-primary">
+      <div className="grid md:grid-cols-2 gap-8">
+        {/* Support and Info Section */}
+        <div className="flex justify-between w-full md:max-w-[500px] capitalize pt-6">
+          {/* Support Column */}
           <div>
-            <h2 className="font-bold">support</h2>
+            <h2 className="font-bold pb-2">Support</h2>
             <ul>
-              <li className="text-sm py-2">Help Center</li>
-              <li className="text-sm py-2">Contact Us</li>
-              <li className="text-sm py-2">Api Status</li>
-              <li className="text-sm py-2">Read Our</li>
+              <li className="text-sm py-2 hover:text-accent cursor-pointer">
+                Help Center
+              </li>
+              <li className="text-sm py-2 hover:text-accent cursor-pointer">
+                Contact Us
+              </li>
+              <li className="text-sm py-2 hover:text-accent cursor-pointer">
+                API Status
+              </li>
+              <li className="text-sm py-2 hover:text-accent cursor-pointer">
+                Read Our Blog
+              </li>
             </ul>
           </div>
+
+          {/* Info Column */}
           <div>
-            <h2 className="font-bold">Info</h2>
+            <h2 className="font-bold pb-2">Info</h2>
             <ul>
-              <li className="text-sm py-2">Meet The Dev</li>
-              <li className="text-sm py-2">About Us</li>
-              <li className="text-sm py-2">Invest</li>
-              <li className="text-sm py-2">Legal</li>
+              <li className="text-sm py-2 hover:text-accent cursor-pointer">
+                Meet The Dev
+              </li>
+              <li className="text-sm py-2 hover:text-accent cursor-pointer">
+                About Us
+              </li>
+              <li className="text-sm py-2 hover:text-accent cursor-pointer">
+                Invest
+              </li>
+              <li className="text-sm py-2 hover:text-accent cursor-pointer">
+                Legal
+              </li>
             </ul>
           </div>
         </div>
-        <div className="text-right">
-          <div className="flex justify-end w-full">
-            <div className="w-full md:max-w-[300px] py-4 relative">
-              <div className="flex justify-center md:justify-end py-4 md:py-0 md:pb-4 mt-[-1rem]">
-                <ThemeToggle />
-              </div>
 
-              <p className="text-center md:text-right">
-                Subscribe To Our Newsletter
-              </p>
-              <div className="py-4">
-                <form action="">
-                  <input
-                    className="bg-primary border border-input p-2 mr-2 w-full shadow-xl rounded-2xl md:w-auto "
-                    type="email"
-                    placeholder="Enter Your Email"
-                  />
-                  <button className="bg-button text-buttonText px-4 p-2 w-full rounded-2xl shadow-xl my-2 hover:shadow-2xl md:w-auto">
-                    Subscribe
-                  </button>
+        {/* Newsletter and Social Links Section */}
+        <div className="text-center md:text-right">
+          <div className="flex justify-center md:justify-end">
+            <div className="w-full md:max-w-[400px]">
+              <div className=" px-6 py-2 rounded-xl mb-4">
+                <p className="text-sm my-2  text-center pb-4 ">
+                  <b>Subscribe to our Newsletter</b>
+                </p>
+                <form className="   mb-3">
+                  <div className="  items-center bg-primary border border-input rounded-2xl shadow-md overflow-hidden focus-within:ring-2 focus-within:ring-accent transition-all duration-300">
+                    <input
+                      className="bg-primary p-3 focus:outline-none w-full  text-center outline-none"
+                      type="email"
+                      placeholder="Enter Your Email"
+                      required
+                    />
+                    <button
+                      className="bg-button w-full text-buttonText px-6 py-3 hover:shadow-lg hover:bg-buttonHover transition-all duration-300"
+                      type="submit"
+                    >
+                      Subscribe
+                    </button>
+                  </div>
                 </form>
               </div>
-              <div className="flex py-4 justify-between text-accent">
-                <AiOutlineInstagram />
-                <FaFacebook />
-                <FaTwitter />
-                <FaGithub />
+
+              <div className="flex items-center justify-center md:justify-center gap-4 pb-4 text-accent text-lg">
+                <ThemeToggle />
+                <AiOutlineInstagram className="text-2xl cursor-pointer hover:text-primary" />
+                <FaFacebook className="text-2xl cursor-pointer hover:text-primary" />
+                <FaTwitter className="text-2xl cursor-pointer hover:text-primary" />
+                <FaGithub className="text-2xl cursor-pointer hover:text-primary" />
               </div>
             </div>
           </div>
         </div>
       </div>
-      <p className="text-center text-sm py-4">
-        {" "}
-        Emeka Manuel 2022. Powered By CoinGecko
-      </p>
+
+      {/* Footer */}
+      <div className="text-center text-sm py-4 border-t border-gray-600">
+        &copy; Dan George 2024. Powered by CoinGecko
+      </div>
     </div>
   );
 };
